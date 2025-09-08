@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeneMentor - Learn Genetics & Vaccine Science</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .header-content {
+            text-align: center;
+            color: white;
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        nav {
+            margin-bottom: 3rem;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .content {
+            margin-bottom: 2rem;
+        }
+
+        .page {
+            display: none;
+            padding: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #34495e;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #2980b9;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #555;
+            font-size: 1.1rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .download-section {
+            text-align: center;
+            margin: 3rem 0;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .privacy-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .privacy-content h2 {
+            margin-top: 2rem;
+        }
+
+        .privacy-content h3 {
+            margin-top: 1.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+            background: rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .nav-btn {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .page {
+                padding: 2rem 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="logo">🧬 GeneMentor</div>
+                <div class="tagline">Master Genetics & Vaccine Science Through Interactive Learning</div>
+            </div>
+        </header>
+
+        <nav>
+            <div class="nav-links">
+                <button class="nav-btn active" onclick="showPage('home')">Home</button>
+                <button class="nav-btn" onclick="showPage('features')">Features</button>
+                <button class="nav-btn" onclick="showPage('about')">About</button>
+                <button class="nav-btn" onclick="showPage('privacy')">Privacy Policy</button>
+            </div>
+        </nav>
+
+        <div class="content">
+            <!-- Home Page -->
+            <div id="home" class="page glass active">
+                <h1>Welcome to GeneMentor</h1>
+                <p>Unlock the mysteries of genetics, understand vaccine science, and explore the cutting-edge world of CRISPR gene editing with GeneMentor - your comprehensive educational companion.</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card glass">
+                        <div class="feature-icon">📚</div>
+                        <h3>Rich Educational Content</h3>
+                        <p>Comprehensive articles covering genetics, vaccines, CRISPR, and molecular biology with images and references.</p>
+                    </div>
+                    <div class="feature-card glass">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Interactive Quizzes</h3>
+                        <p>Test your knowledge with quizzes across multiple categories and difficulty levels.</p>
+                    </div>
+                    <div class="feature-card glass">
+                        <div class="feature-icon">📖</div>
+                        <h3>Scientific Glossary</h3>
+                        <p>Built-in glossary with simple and technical explanations for complex genetic terms.</p>
+                    </div>
+                    <div class="feature-card glass">
+                        <div class="feature-icon">🏆</div>
+                        <h3>Progress Tracking</h3>
+                        <p>Gamified learning with XP points, levels, badges, and learning streaks.</p>
+                    </div>
+                </div>
+
+                <div class="download-section">
+                    <h2>Ready to Start Learning?</h2>
+                    <p>Download GeneMentor from Google Play Store and begin your genetics education journey today!</p>
+                    <a href="#" class="download-btn">📱 Download on Google Play</a>
+                </div>
+            </div>
+
+            <!-- Features Page -->
+            <div id="features" class="page glass">
+                <h1>App Features</h1>
+                
+                <h2>🎓 Adaptive Learning System</h2>
+                <p>GeneMentor adapts to your learning style with content categorized by difficulty levels:</p>
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li><strong>Beginner:</strong> Introduction to basic genetic concepts</li>
+                    <li><strong>Intermediate:</strong> Detailed mechanisms and processes</li>
+                    <li><strong>Advanced:</strong> Complex genetic engineering and research topics</li>
+                </ul>
+
+                <h2>🧪 Comprehensive Subject Coverage</h2>
+                <p>Explore these key areas of genetics and molecular biology:</p>
+                <div class="features-grid">
+                    <div class="feature-card glass">
+                        <h3>🧬 Genetics Fundamentals</h3>
+                        <p>DNA structure, inheritance patterns, genetic variation, and heredity</p>
+                    </div>
+                    <div class="feature-card glass">
+                        <h3>💉 Vaccine Science</h3>
+                        <p>How vaccines work, types of vaccines, immune response, and public health</p>
+                    </div>
+                    <div class="feature-card glass">
+                        <h3>✂️ CRISPR & Gene Editing</h3>
+                        <p>Gene editing technologies, applications, and ethical considerations</p>
+                    </div>
+                    <div class="feature-card glass">
+                        <h3>⚖️ Bioethics</h3>
+                        <p>Ethical implications of genetic research and biotechnology</p>
+                    </div>
+                </div>
+
+                <h2>🎮 Gamified Learning Experience</h2>
+                <p>Stay motivated with our comprehensive progress tracking system that includes XP points, achievement badges, learning streaks, and personalized content recommendations based on your interests and performance.</p>
+
+                <h2>📱 User-Friendly Design</h2>
+                <p>Enjoy a clean, intuitive interface with offline capability, rich media support for scientific diagrams and images, and multi-format quiz questions including multiple choice, true/false, and interactive elements.</p>
+            </div>
+
+            <!-- About Page -->
+            <div id="about" class="page glass">
+                <h1>About GeneMentor</h1>
+                
+                <h2>Our Mission</h2>
+                <p>GeneMentor was created to make genetics and vaccine science accessible to everyone. We believe that understanding these fundamental aspects of biology is crucial in today's world, where genetic technologies and vaccine development play increasingly important roles in medicine and society.</p>
+
+                <h2>Who We Serve</h2>
+                <p>Our app is designed for:</p>
+                <ul style="margin: 1rem 0; padding-left: 2rem;">
+                    <li><strong>Students:</strong> Learning genetics, molecular biology, and related sciences</li>
+                    <li><strong>General Public:</strong> Anyone interested in understanding vaccine science and gene editing</li>
+                    <li><strong>Educators:</strong> Teachers looking for supplementary educational materials</li>
+                    <li><strong>Curious Minds:</strong> Individuals seeking accessible explanations of complex genetic concepts</li>
+                </ul>
+
+                <h2>Educational Philosophy</h2>
+                <p>We believe that complex scientific concepts can be made accessible without compromising accuracy. GeneMentor provides scientifically accurate information presented in an engaging, interactive format that adapts to different learning styles and knowledge levels.</p>
+
+                <h2>Privacy & Safety</h2>
+                <p>GeneMentor is committed to user privacy. Our app requires no special permissions and collects no personal data. We believe learning should be safe, secure, and focused entirely on education.</p>
+
+                <h2>Continuous Improvement</h2>
+                <p>We are constantly updating our content library with the latest scientific discoveries and educational best practices. Our goal is to remain the most comprehensive and up-to-date genetics education app available.</p>
+            </div>
+
+            <!-- Privacy Policy Page -->
+            <div id="privacy" class="page glass">
+                <div class="privacy-content">
+                    <h1>Privacy Policy</h1>
+                    <p><strong>Last updated:</strong> [Current Date]</p>
+
+                    <h2>Introduction</h2>
+                    <p>GeneMentor ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how our educational Android application handles user information.</p>
+
+                    <h2>Information We Collect</h2>
+                    <h3>Personal Information</h3>
+                    <p><strong>We do not collect any personal information.</strong> GeneMentor does not require user registration, account creation, or any form of personal data input.</p>
+
+                    <h3>Usage Data</h3>
+                    <p><strong>We do not collect usage data.</strong> GeneMentor does not track, store, or transmit any information about how you use the app, including:</p>
+                    <ul style="margin: 1rem 0; padding-left: 2rem;">
+                        <li>Quiz scores or learning progress</li>
+                        <li>Time spent in the app</li>
+                        <li>Content viewed or accessed</li>
+                        <li>Device information or identifiers</li>
+                        <li>App usage patterns or analytics</li>
+                    </ul>
+
+                    <h2>Local Data Storage</h2>
+                    <p>All app data, including your learning progress, quiz scores, and preferences, is stored locally on your device only. This information:</p>
+                    <ul style="margin: 1rem 0; padding-left: 2rem;">
+                        <li>Never leaves your device</li>
+                        <li>Is not transmitted to our servers</li>
+                        <li>Is not shared with third parties</li>
+                        <li>Is deleted when you uninstall the app</li>
+                    </ul>
+
+                    <h2>Permissions</h2>
+                    <p><strong>GeneMentor requires no special permissions.</strong> The app operates entirely offline and does not require access to:</p>
+                    <ul style="margin: 1rem 0; padding-left: 2rem;">
+                        <li>Internet or network connections</li>
+                        <li>Device storage beyond the app's own data</li>
+                        <li>Camera, microphone, or other device sensors</li>
+                        <li>Location services</li>
+                        <li>Contacts or other personal information</li>
+                    </ul>
+
+                    <h2>Third-Party Services</h2>
+                    <p>GeneMentor does not integrate with any third-party services, analytics platforms, or advertising networks. The app operates completely independently without external connections.</p>
+
+                    <h2>Children's Privacy</h2>
+                    <p>Since we collect no personal information, GeneMentor is safe for users of all ages, including children under 13. Parents can be confident that no personal data is collected, stored, or transmitted by our app.</p>
+
+                    <h2>Data Security</h2>
+                    <p>Because GeneMentor collects no personal data and requires no permissions, there are no privacy risks associated with using our app. All educational content and progress data remains on your device.</p>
+
+                    <h2>Changes to Privacy Policy</h2>
+                    <p>Any changes to this Privacy Policy will be posted within the app and on this website. However, given our commitment to zero data collection, we do not anticipate significant changes to our privacy practices.</p>
+
+                    <h2>Contact Information</h2>
+                    <p>If you have questions about this Privacy Policy or GeneMentor's privacy practices, please contact us at:</p>
+                    <p><strong>Email:</strong> [Your Contact Email]<br>
+                    <strong>Website:</strong> [Your Website URL]</p>
+
+                    <h2>Compliance</h2>
+                    <p>This privacy policy complies with:</p>
+                    <ul style="margin: 1rem 0; padding-left: 2rem;">
+                        <li>Google Play Store privacy requirements</li>
+                        <li>Children's Online Privacy Protection Act (COPPA)</li>
+                        <li>General Data Protection Regulation (GDPR) principles</li>
+                        <li>California Consumer Privacy Act (CCPA) standards</li>
+                    </ul>
+
+                    <h2>Summary</h2>
+                    <p><strong>GeneMentor is a completely private educational app.</strong> We collect no data, require no permissions, and operate entirely offline. Your privacy is fully protected because there is nothing to protect - we simply don't collect any information about you or your device.</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 GeneMentor. All rights reserved. | Making genetics education accessible to everyone.</p>
+        </footer>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Remove active class from all nav buttons
+            const navBtns = document.querySelectorAll('.nav-btn');
+            navBtns.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected page
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+
+            // Add active class to corresponding nav button
+            const activeNavBtn = document.querySelector(`a[href="#${pageId}"]`);
+            if (activeNavBtn) {
+                activeNavBtn.classList.add('active');
+            }
+        }
+
+        function handleHashChange() {
+            const hash = window.location.hash.substring(1); // Remove the # symbol
+            const pageId = hash || 'home'; // Default to home if no hash
+            showPage(pageId);
+        }
+
+        // Handle initial page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle hash changes
+            window.addEventListener('hashchange', handleHashChange);
+            
+            // Handle initial page load
+            handleHashChange();
+
+            // Add some interactive animations
+            const featureCards = document.querySelectorAll('.feature-card');
+            featureCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px) scale(1.02)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
